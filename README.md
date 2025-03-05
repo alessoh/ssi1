@@ -117,7 +117,9 @@ The benefit of this approach is that it combines the pattern-recognition power o
 ## Usage
 
 app.py is a simple demo
+
 app2.py is an extended model
+
 appdata.py reads data files
 ```
 
