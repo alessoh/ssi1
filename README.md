@@ -18,7 +18,21 @@ SSI is a new Superintelligence approached using Neural-Symbolic
 
 ## Introduction
 
-SSI addresses the challenges of improving AI reasoning abilities.
+Artificial superintelligence (ASI) development represents one of the most profound technological challenges of our time. ASI is defined as "AI systems that surpass human intelligence in all tasks and domains with exceptional thinking skills". 
+
+
+Unlike artificial narrow intelligence (ANI), which excels at specific tasks, or artificial general intelligence (AGI), which matches human-level capabilities across domains, ASI would significantly outperform humans across all cognitive tasks.
+
+
+Yoshua Bengio (https://arxiv.org/pdf/2502.15657) emphasized the necessity for deep learning to evolve from "System 1" thinking (intuitive, fast, unconscious cognitive processes) to "System 2" thinking (logical, deliberate, conscious cognitive processes). 
+
+
+Today, Test-time computing tries to encapsulate System 2 thinking. However, it is not robust.
+
+A robust AI system capable of complex reasoning requires integrating pattern recognition and neural-symbolic.
+
+
+AI researcher Ilya Sutskever and venture capitalists are putting some $2 billion into Sutskever's secretive company, Safe Superintelligence (SSI), based on a new principle for its model. The most likely method he will use is Neural-Symbolic.
 
 ## Key Features
 
