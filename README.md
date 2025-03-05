@@ -36,7 +36,25 @@ AI researcher Ilya Sutskever and venture capitalists are putting some $2 billion
 
 ## Key Features
 
-- **Role-Based Agent Design:** Customize agents with specific roles, goals, and tools.
+- **Design:** The Neural-Symbolic Paradigm
+
+Neural-symbolic integration combines the strengths of neural networks (learning from data, recognizing patterns) with symbolic systems (logical reasoning, knowledge representation). 
+
+
+This approach aims to overcome the limitations of each approach when used in isolation:
+
+•	Neural networks excel at pattern recognition and representation learning but often function as "black boxes" with limited interpretability and reasoning capabilities.
+
+•	Symbolic systems provide transparent, rule-based reasoning but lack adaptability and struggle with uncertainty and noisy data.
+
+
+As detailed in Shenzhe Zhu https://arxiv.org/pdf/2502.12904, neural-symbolic systems can be categorized into three primary frameworks:
+
+1.	Neural for Symbol: Using neural networks to enhance symbolic reasoning, particularly by accelerating knowledge graph reasoning.
+
+2.	Symbol for Neural: Leveraging symbolic systems to provide prior knowledge and logical frameworks to guide and constrain neural networks.
+
+3.	Hybrid Neural-Symbolic Integration: Creating systems where neural and symbolic components interact bidirectionally, each enhancing the other's capabilities.
 
 
 ## Architecture
