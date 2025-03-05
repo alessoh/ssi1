@@ -59,7 +59,29 @@ As detailed in Shenzhe Zhu https://arxiv.org/pdf/2502.12904, neural-symbolic sys
 
 ## Architecture
 
-SSI uses a modular architecture with separate components for different functionalities:
+What This Medical Diagnosis Program Does in Simple Terms
+This program acts like a smart doctor's assistant that helps diagnose patients based on their symptoms. It works in three main steps:
+Step 1: Pattern Recognition
+First, the program uses a neural network (like a pattern-matching brain) that has been trained on hundreds of patient cases. When you input a patient's symptoms (like fever, cough, headache), this part of the program recognizes patterns it has seen before and makes an initial guess about the diagnosis - like "this looks like the flu" or "this might be COVID-19."
+Step 2: Rule Checking
+Next, the program has a built-in medical rulebook that contains doctor's knowledge about different diseases. For example, it knows that COVID-19 typically involves fever, cough, and loss of taste/smell, while a common cold usually has runny nose and sneezing without high fever.
+The program checks if the initial guess makes sense according to these medical rules. For instance, if the neural network said "COVID-19" but the patient doesn't have any of the key COVID symptoms, the rulebook would flag this as suspicious.
+Step 3: Final Decision
+The program then makes its final decision:
+
+If the initial guess passes the rule check, it confirms the diagnosis
+If not, it looks for alternative diagnoses that better match the symptoms
+It provides an explanation for why it reached its conclusion, pointing out which symptoms support or contradict the diagnosis
+It also gives a confidence score to show how certain it is
+
+Example
+If a patient has fever, cough, and loss of taste/smell, the program might say:
+
+"Diagnosis: COVID-19 (85% confidence)"
+"Explanation: Patient has key symptoms of COVID-19: fever, cough, loss of taste/smell"
+
+If a patient has symptoms that don't clearly match any disease, it might say the diagnosis is "Uncertain" and explain why.
+The benefit of this approach is that it combines the pattern-recognition power of AI with transparent medical knowledge, making it both accurate and able to explain its reasoning just like a human doctor would.
 
 
 ## Installation
