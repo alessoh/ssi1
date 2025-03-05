@@ -1,145 +1,145 @@
-# Add this code at the appropriate location in your main script
-# to fix the test cases section that was cut off
+import numpy as np
+import tensorflow as tf
+from tensorflow import keras
 
-# ==============================
-# Demonstrate the system with test cases
-# ==============================
+# Define our symptom features (input)
+# Fever, Cough, Fatigue, Headache, Sore Throat
+symptoms = np.array([
+    [1, 0, 1, 0, 0],  # Patient 1
+    [0, 1, 0, 0, 1],  # Patient 2
+    [1, 1, 1, 0, 0],  # Patient 3
+    [0, 0, 1, 1, 0],  # Patient 4
+    [1, 1, 0, 0, 1],  # Patient 5
+])
 
-def print_diagnosis_result(result, case_num):
-    """Pretty print the diagnosis result"""
-    print(f"\n{'='*20} CASE {case_num} {'='*20}")
-    print(f"Symptoms: {', '.join(result['symptoms'])}")
+# Define diagnosis labels (output)
+# Cold, Flu, COVID, Allergy
+diagnoses = np.array([
+    [0, 1, 0, 0],  # Patient 1 - Flu
+    [1, 0, 0, 0],  # Patient 2 - Cold
+    [0, 0, 1, 0],  # Patient 3 - COVID
+    [0, 0, 0, 1],  # Patient 4 - Allergy
+    [1, 0, 0, 0],  # Patient 5 - Cold
+])
+
+# Create a simple neural network
+model = keras.Sequential([
+    keras.layers.Dense(8, activation='relu', input_shape=(5,)),
+    keras.layers.Dense(4, activation='softmax')
+])
+
+model.compile(optimizer='adam', 
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Train the model
+model.fit(symptoms, diagnoses, epochs=100, verbose=0)
+
+# Model can now predict diagnoses based on symptoms
+
+class SymbolicReasoner:
+    def __init__(self):
+        # Define medical knowledge as rules
+        self.rules = [
+            # Rule format: (diagnosis, required_symptoms, contradicting_symptoms, explanation)
+            ("Cold", ["Cough", "Sore Throat"], ["High Fever"], 
+             "Patient has Cold symptoms: cough and sore throat without high fever"),
+            
+            ("Flu", ["Fever", "Fatigue"], [], 
+             "Patient has Flu symptoms: fever and fatigue"),
+            
+            ("COVID", ["Fever", "Cough", "Fatigue"], [], 
+             "Patient has COVID symptoms: fever, cough and fatigue"),
+            
+            ("Allergy", ["Headache"], ["Fever"], 
+             "Patient has Allergy symptoms: headache without fever")
+        ]
+        
+        # Mapping from symptom index to name
+        self.symptom_names = ["Fever", "Cough", "Fatigue", "Headache", "Sore Throat"]
+        self.diagnosis_names = ["Cold", "Flu", "COVID", "Allergy"]
+    
+    def get_patient_symptoms(self, symptom_vector):
+        """Convert symptom vector to list of symptom names"""
+        return [self.symptom_names[i] for i, has_symptom in enumerate(symptom_vector) if has_symptom]
+    
+    def verify_diagnosis(self, diagnosis_index, symptom_vector):
+        """Verify if diagnosis is consistent with symbolic rules"""
+        diagnosis = self.diagnosis_names[diagnosis_index]
+        patient_symptoms = self.get_patient_symptoms(symptom_vector)
+        
+        for rule_diagnosis, required, contradicting, explanation in self.rules:
+            if rule_diagnosis == diagnosis:
+                # Check if all required symptoms are present
+                if all(symptom in patient_symptoms for symptom in required):
+                    # Check if no contradicting symptoms are present
+                    if not any(symptom in patient_symptoms for symptom in contradicting):
+                        return True, explanation
+        
+        return False, "Diagnosis does not match medical knowledge rules"
+
+class NeuralSymbolicSystem:
+    def __init__(self, neural_model, symbolic_reasoner):
+        self.neural_model = neural_model
+        self.symbolic_reasoner = symbolic_reasoner
+    
+    def diagnose(self, symptoms):
+        # Step 1: Get neural network prediction
+        neural_prediction = self.neural_model.predict(np.array([symptoms]))[0]
+        predicted_diagnosis = np.argmax(neural_prediction)
+        confidence = neural_prediction[predicted_diagnosis]
+        
+        # Step 2: Verify with symbolic reasoner
+        is_valid, explanation = self.symbolic_reasoner.verify_diagnosis(
+            predicted_diagnosis, symptoms)
+        
+        # Step 3: Final decision with explanation
+        if is_valid:
+            final_diagnosis = self.symbolic_reasoner.diagnosis_names[predicted_diagnosis]
+            return {
+                "diagnosis": final_diagnosis,
+                "confidence": float(confidence),
+                "explanation": explanation,
+                "verified": True
+            }
+        else:
+            # Find alternative diagnosis using symbolic rules
+            for i, diagnosis in enumerate(self.symbolic_reasoner.diagnosis_names):
+                is_valid, explanation = self.symbolic_reasoner.verify_diagnosis(i, symptoms)
+                if is_valid:
+                    return {
+                        "diagnosis": diagnosis,
+                        "confidence": float(neural_prediction[i]),
+                        "explanation": explanation + " (neural prediction overridden)",
+                        "verified": True
+                    }
+            
+            # If no valid diagnosis found
+            return {
+                "diagnosis": "Uncertain",
+                "confidence": 0.0,
+                "explanation": "No consistent diagnosis found",
+                "verified": False
+            }
+
+# Initialize our hybrid system
+reasoner = SymbolicReasoner()
+hybrid_system = NeuralSymbolicSystem(model, reasoner)
+
+# Test cases
+test_cases = [
+    # Fever, Cough, Fatigue, Headache, Sore Throat
+    [1, 0, 1, 0, 0],  # Classic flu symptoms
+    [0, 1, 0, 0, 1],  # Classic cold symptoms
+    [1, 1, 1, 0, 0],  # COVID symptoms
+    [0, 0, 0, 1, 1],  # Unusual combination
+    [1, 0, 0, 1, 0],  # Fever and headache
+]
+
+for i, symptoms in enumerate(test_cases):
+    result = hybrid_system.diagnose(symptoms)
+    print(f"\nPatient {i+1} with symptoms: {reasoner.get_patient_symptoms(symptoms)}")
     print(f"Diagnosis: {result['diagnosis']}")
     print(f"Confidence: {result['confidence']:.2f}")
-    print(f"Neural Network Confidence: {result['neural_confidence']:.2f}")
-    
-    if 'symbolic_confidence' in result:
-        print(f"Symbolic Confidence: {result['symbolic_confidence']:.2f}")
-    
-    print(f"Verified: {result['verified']}")
     print(f"Explanation: {result['explanation']}")
-    
-    if 'note' in result and result['note']:
-        print(f"Note: {result['note']}")
-    
-    if 'neural_prediction' in result:
-        print(f"Original Neural Prediction: {result['neural_prediction']}")
-
-# Create the neural-symbolic system
-nss = NeuralSymbolicDiagnosisSystem(nn_model, kb, symptoms, diagnoses)
-
-# Test case 1: Classic COVID-19 symptoms
-test_case1 = np.zeros(len(symptoms))
-for symptom in ["Fever", "Cough", "Fatigue", "Loss of Taste/Smell", "Shortness of Breath"]:
-    if symptom in symptoms:
-        test_case1[symptoms.index(symptom)] = 1
-result1 = nss.diagnose(test_case1)
-print_diagnosis_result(result1, 1)
-
-# Test case 2: Classic Flu symptoms
-test_case2 = np.zeros(len(symptoms))
-for symptom in ["Fever", "Body Ache", "Fatigue", "Headache", "Cough", "Chills"]:
-    if symptom in symptoms:
-        test_case2[symptoms.index(symptom)] = 1
-result2 = nss.diagnose(test_case2)
-print_diagnosis_result(result2, 2)
-
-# Test case 3: Mixed symptoms (pneumonia + some COVID symptoms)
-test_case3 = np.zeros(len(symptoms))
-for symptom in ["Fever", "Cough", "Shortness of Breath", "Chest Pain", "Loss of Taste/Smell"]:
-    if symptom in symptoms:
-        test_case3[symptoms.index(symptom)] = 1
-result3 = nss.diagnose(test_case3)
-print_diagnosis_result(result3, 3)
-
-# Test case 4: Ambiguous case (mild symptoms)
-test_case4 = np.zeros(len(symptoms))
-for symptom in ["Fatigue", "Headache", "Runny Nose"]:
-    if symptom in symptoms:
-        test_case4[symptoms.index(symptom)] = 1
-result4 = nss.diagnose(test_case4)
-print_diagnosis_result(result4, 4)
-
-# Test case 5: Contradicting symptoms
-test_case5 = np.zeros(len(symptoms))
-for symptom in ["Sore Throat", "Fever", "Swollen Lymph Nodes", "Cough", "Runny Nose"]:
-    if symptom in symptoms:
-        test_case5[symptoms.index(symptom)] = 1
-result5 = nss.diagnose(test_case5)
-print_diagnosis_result(result5, 5)
-
-# Load patient from file for testing
-try:
-    print("\n=== Testing with a real patient case from file ===")
-    # Get a random patient from the test set
-    patient_idx = np.random.randint(0, len(X_test))
-    patient_symptoms = X_test[patient_idx]
-    actual_diagnosis = diagnoses[np.argmax(y_test[patient_idx])]
-    
-    # Diagnose the patient
-    result = nss.diagnose(patient_symptoms)
-    
-    # Print results
-    print(f"\n{'='*20} PATIENT FROM FILE {'='*20}")
-    print(f"Symptoms: {', '.join(result['symptoms'])}")
-    print(f"Actual Diagnosis: {actual_diagnosis}")
-    print(f"System's Diagnosis: {result['diagnosis']}")
-    print(f"Confidence: {result['confidence']:.2f}")
     print(f"Verified: {result['verified']}")
-    print(f"Explanation: {result['explanation']}")
-    
-except Exception as e:
-    print(f"Could not test with patient from file: {e}")
-
-# ==============================
-# Evaluate system performance
-# ==============================
-
-# Evaluate neural network component
-loss, accuracy = nn_model.evaluate(X_test, y_test)
-print(f"\n{'='*20} NEURAL NETWORK EVALUATION {'='*20}")
-print(f"Test Loss: {loss:.4f}")
-print(f"Test Accuracy: {accuracy:.4f}")
-
-# Evaluate neural-symbolic system on test set
-print(f"\n{'='*20} NEURAL-SYMBOLIC SYSTEM EVALUATION {'='*20}")
-neural_correct = 0
-symbolic_correct = 0
-combined_correct = 0
-
-y_true = np.argmax(y_test, axis=1)
-y_pred_neural = np.argmax(nn_model.predict(X_test), axis=1)
-y_pred_combined = []
-
-for i in range(len(X_test)):
-    # Get true diagnosis
-    true_diagnosis = diagnoses[y_true[i]]
-    
-    # Get neural prediction
-    neural_prediction = diagnoses[y_pred_neural[i]]
-    
-    # Get neural-symbolic prediction
-    result = nss.diagnose(X_test[i])
-    combined_prediction = result["diagnosis"]
-    y_pred_combined.append(diagnoses.index(combined_prediction) if combined_prediction in diagnoses else -1)
-    
-    # Count correct predictions
-    if neural_prediction == true_diagnosis:
-        neural_correct += 1
-    
-    if combined_prediction == true_diagnosis:
-        combined_correct += 1
-        
-    if result["verified"]:
-        symbolic_correct += 1
-
-print(f"Neural Network Accuracy: {neural_correct / len(X_test):.4f}")
-print(f"Neural-Symbolic System Accuracy: {combined_correct / len(X_test):.4f}")
-print(f"Percentage of Symbolically Verified Cases: {symbolic_correct / len(X_test):.4f}")
-
-print("\nNeural-Symbolic System Benefits:")
-print("1. Explainability: Provides human-readable explanations for diagnoses")
-print("2. Verification: Uses medical knowledge to verify neural predictions")
-print("3. Fallback Mechanism: Can suggest alternatives when neural predictions are inconsistent")
-print("4. Confidence Estimation: Combines neural and symbolic confidence scores")
-print("5. Improved accuracy through integrated reasoning")
