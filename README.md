@@ -14,7 +14,7 @@ SSI is a new Superintelligence approached using Neural-Symbolic
 9. [Future Enhancements](#future-enhancements)
 10. [Contributing](#contributing)
 11. [License](#license)
-12. [Contact](#contact)
+12. [Contact](#contact) 
 
 ## Introduction
 
