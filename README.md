@@ -10,7 +10,7 @@ SSI is a new Superintelligence approached using Neural-Symbolic
 5. [Usage](#usage)
 6. [Project Structure](#project-structure)
 7. [Postmortem Analysis](#postmortem-analysis)
-8. [Continuous Learning](#continuous-learning)
+8. [Continuous Learning](#lessons-learned)
 9. [Future Enhancements](#future-enhancements)
 10. [Contributing](#contributing)
 11. [License](#license)
@@ -121,13 +121,16 @@ app.py is a simple demo
 app2.py is an extended model
 
 appdata.py reads data files
-```
 
+## Project Structure
+
+## Postmortem Analysis
+
+## Lessons Learned
 
 ## Future Enhancements
 
 - Implementation of a neural transformer for better agent coordination.
-
 
 ## License
 
