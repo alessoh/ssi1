@@ -122,7 +122,9 @@ app2.py is an extended model
 
 appdata.py reads data files
 
-app4.py NEXUS Architecture .
+app4.py NEXUS Architecture
+
+app7.py A Neural-Symbolic Architecture for Medical Diagnosis with Transparent Reasoning 
 
 ## NEXUS Project Structure
 
