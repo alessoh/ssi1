@@ -128,6 +128,8 @@ app7.py A Neural-Symbolic Architecture for Medical Diagnosis with Transparent Re
 
 Trans2.py NEXUS-transformer
 
+Trans3.py NEXUS-transformer Upgrade
+
 ## NEXUS Project Structure
 
 NEXUS: Neural-Symbolic Superintelligence Architecture
