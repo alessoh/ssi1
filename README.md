@@ -130,6 +130,8 @@ Trans2.py NEXUS-transformer
 
 Trans3.py NEXUS-transformer Upgrade
 
+Toytransformer3.py NEXUS-transformer Upgrade
+
 ## NEXUS Project Structure
 
 NEXUS: Neural-Symbolic Superintelligence Architecture
@@ -183,6 +185,8 @@ The system maintains a "reasoning trace" that can be used for explanation and ve
 I've designed a comprehensive neural-symbolic architecture called NEXUS-Transformer that combines the deep integration capabilities of transformer models with explicit knowledge representation and metacognitive control. This system represents a significant advancement toward superintelligent AI with both high performance and interpretability.
 
 Trans2.py NEXUS-transformer
+
+Toytransformer3.py NEXUS-transformer Upgrade
 
 ![Alt text](./Nexustransformer.png)
 
