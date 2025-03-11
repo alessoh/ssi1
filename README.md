@@ -188,6 +188,8 @@ Trans2.py NEXUS-transformer
 
 Toytransformer3.py NEXUS-transformer Upgrade
 
+NexusMar11.py model with 10,000synthetic data patients
+
 ![Alt text](./Nexustransformer.png)
 
 NEXUS-Transformer: Key Components
