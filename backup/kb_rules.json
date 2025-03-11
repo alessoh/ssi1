@@ -1,0 +1,42 @@
+{
+    "Common Cold": {
+      "required": ["Cough", "Runny Nose", "Congestion", "Sneezing", "Sore Throat"],
+      "contradicting": ["Severe Fever", "Shortness of Breath", "Chest Pain", "Loss of Taste/Smell"],
+      "explanation": "Common cold typically presents with upper respiratory symptoms like coughing, runny nose, and sneezing, usually without high fever."
+    },
+    "Influenza": {
+      "required": ["Fever", "Body Ache", "Fatigue", "Headache", "Cough"],
+      "contradicting": ["Loss of Taste/Smell", "Rash"],
+      "explanation": "Influenza (flu) typically has a sudden onset with fever, severe body aches, and fatigue, along with respiratory symptoms."
+    },
+    "COVID-19": {
+      "required": ["Fever", "Cough", "Fatigue", "Loss of Taste/Smell", "Shortness of Breath"],
+      "contradicting": ["Rash", "Swollen Lymph Nodes"],
+      "explanation": "COVID-19 often presents with fever, cough, fatigue, and distinctive symptoms like loss of taste or smell."
+    },
+    "Allergic Rhinitis": {
+      "required": ["Sneezing", "Runny Nose", "Congestion"],
+      "contradicting": ["Fever", "Chest Pain", "Shortness of Breath", "Vomiting", "Loss of Taste/Smell"],
+      "explanation": "Allergic rhinitis is characterized by sneezing, runny nose, and congestion without fever, typically triggered by allergens."
+    },
+    "Pneumonia": {
+      "required": ["Fever", "Cough", "Shortness of Breath", "Chest Pain"],
+      "contradicting": ["Rash", "Loss of Taste/Smell"],
+      "explanation": "Pneumonia involves infection of the lungs, causing fever, productive cough, shortness of breath, and often chest pain."
+    },
+    "Bronchitis": {
+      "required": ["Cough", "Fatigue", "Shortness of Breath", "Chest Pain"],
+      "contradicting": ["Severe Fever", "Rash", "Swollen Lymph Nodes"],
+      "explanation": "Bronchitis is inflammation of the airways, causing persistent cough, often with mucus production, and sometimes chest discomfort."
+    },
+    "Sinusitis": {
+      "required": ["Congestion", "Headache", "Facial Pain", "Runny Nose"],
+      "contradicting": ["Shortness of Breath", "Chest Pain", "Rash"],
+      "explanation": "Sinusitis involves inflammation of the sinuses, causing facial pain/pressure, congestion, and sometimes thick nasal discharge."
+    },
+    "Strep Throat": {
+      "required": ["Sore Throat", "Fever", "Swollen Lymph Nodes", "Headache"],
+      "contradicting": ["Cough", "Runny Nose", "Shortness of Breath"],
+      "explanation": "Strep throat is characterized by severe sore throat, fever, and swollen lymph nodes, typically without cough or runny nose."
+    }
+  }

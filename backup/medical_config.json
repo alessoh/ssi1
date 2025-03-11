@@ -1,0 +1,35 @@
+{
+    "symptoms": [
+      "Fever", 
+      "Cough", 
+      "Fatigue", 
+      "Headache", 
+      "Sore Throat", 
+      "Shortness of Breath", 
+      "Body Ache", 
+      "Runny Nose", 
+      "Sneezing",
+      "Chest Pain", 
+      "Dizziness", 
+      "Nausea", 
+      "Vomiting", 
+      "Diarrhea",
+      "Rash", 
+      "Joint Pain", 
+      "Chills", 
+      "Loss of Taste/Smell", 
+      "Congestion", 
+      "Swollen Lymph Nodes",
+      "Facial Pain"
+    ],
+    "diagnoses": [
+      "Common Cold", 
+      "Influenza", 
+      "COVID-19", 
+      "Allergic Rhinitis", 
+      "Pneumonia", 
+      "Bronchitis", 
+      "Sinusitis", 
+      "Strep Throat"
+    ]
+  }
