@@ -6,3 +6,5 @@ sklearn.metrics
 networkx
 math
 typing
+seaborn
+tabulate
